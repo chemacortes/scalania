@@ -1,13 +1,10 @@
 import de.johoop.jacoco4sbt._
 import JacocoPlugin.jacoco.{settings => jacocoSettings}
-import org.scalastyle.sbt.PluginKeys
-import org.scalastyle.sbt.ScalastylePlugin.{Settings => scalastyleSettings}
 
-name := s"${(name in Global).value}-answers"
+name := s"${(name in Global).value}-${name.value}"
 
-scalastyleSettings
-
-org.scalastyle.sbt.PluginKeys.config := file("project/scalastyle_config.xml")
+scalastyleConfig := file("project/scalastyle_config.xml")
+scalastyleFailOnError := true
 
 scalariformSettings
 
@@ -25,6 +22,7 @@ testOptions in Test := Seq(
   )
 )
 
-instrumentSettings
+scapegoatDisabledInspections := Seq("X")
+scapegoatEnabledInspections := Seq("ArraysToString")
+scapegoatIgnoredFiles := Seq("X")
 
-coverallsSettings
